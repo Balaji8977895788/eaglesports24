@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basketball Jerseys | Eagle Sports</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css?v=4">
+</head>
+<body class="collection-body">
+    <div class="collection-bg-overlay"></div>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="brand">
+                <span class="brand-icon">🦅</span> Eagle Sports Wear
+            </a>
+            <div class="nav-links">
+                <a href="index.html" class="btn-outline">← Back to Categories</a>
+                <a href="contact.html" class="btn-contact">Contact Us</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="catalog-section collection-main">
+        <div class="container">
+            <h2 class="section-title">🏀 Basketball Collection</h2>
+            <div id="jersey-grid" class="main-grid">
+                <!-- Rendered by JS -->
+            </div>
+            <p id="empty-message" style="text-align:center; color:#94a3b8; display:none;">No jerseys uploaded yet. Go to Admin Portal to add some!</p>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container text-center">
+            <p>&copy; 2026 Eagle Sports. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js?v=4"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            renderJerseysByCategory('Basketball');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+node_modules/
+.env
+
+# Depending on your database choice, you might want to uncomment these to avoid uploading SQLite files
+# database.sqlite
+# database.sqlite-shm
+# database.sqlite-wal

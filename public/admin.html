@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Portal | Eagle Sports</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css?v=4">
+</head>
+<body class="admin-body">
+    <!-- Background overlay for eagle image -->
+    <div class="admin-bg-overlay"></div>
+
+    <!-- Floating particles for visual flair -->
+    <div class="admin-particles" id="admin-particles"></div>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="brand">
+                <span class="brand-icon">🦅</span> Eagle Sports Admin
+            </a>
+            <div class="nav-links">
+                <a href="contact.html" class="btn-contact">Contact Us</a>
+                <a href="index.html" class="btn-outline">← Back to Home</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="admin-main">
+        <div class="container">
+            <!-- Admin Header Banner -->
+            <div class="admin-header-banner">
+                <div class="admin-header-icon">🛡️</div>
+                <h1 class="admin-header-title">Admin Portal</h1>
+                <p class="admin-header-subtitle">Manage your Eagle Sports jersey catalog</p>
+                <div class="admin-stats" id="admin-stats">
+                    <!-- Stats populated by JS -->
+                </div>
+            </div>
+
+            <div class="admin-layout">
+                <!-- Upload Card -->
+                <div class="admin-card admin-card-glow">
+                    <div class="admin-card-header">
+                        <span class="admin-card-icon">📤</span>
+                        <div>
+                            <h2>Upload New Jersey</h2>
+                            <p>Add new designs to the Eagle Sports catalog.</p>
+                        </div>
+                    </div>
+                    
+                    <form id="upload-form" class="upload-form">
+                        <div class="form-group">
+                            <label for="jersey-name">Jersey Name</label>
+                            <input type="text" id="jersey-name" required placeholder="e.g., Neon Spike Edition">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="jersey-category">Category</label>
+                            <select id="jersey-category" required>
+                                <option value="Volleyball">🏐 Volleyball</option>
+                                <option value="Basketball">🏀 Basketball</option>
+                                <option value="Kabaddi">🤾 Kabaddi</option>
+                                <option value="Cricket Jerseys">🏏 Cricket Jerseys</option>
+                                <option value="Festival Design">🎉 Festival Design</option>
+                                <option value="Special Jerseys">⭐ Special Jerseys</option>
+                                <option value="Cricket">🏏 Cricket</option>
+                                <option value="Football">⚽ Football</option>
+                                <option value="Esports">🎮 Esports</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Jersey Image</label>
+                            <div class="image-upload-wrapper">
+                                <input type="file" id="jersey-image-file" accept="image/*" class="file-input">
+                                <div class="upload-placeholder" id="upload-placeholder">
+                                    <div class="upload-placeholder-content">
+                                        <span class="upload-icon">📁</span>
+                                        <span>Click to select or drag and drop an image</span>
+                                        <span class="upload-hint">PNG, JPG up to 5MB</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <img id="image-preview" class="image-preview" style="display:none;" />
+                        </div>
+
+                        <button type="submit" class="btn-primary w-100 btn-upload-glow">
+                            <span>🚀</span> Add to Catalog
+                        </button>
+                        <div id="upload-message" class="message"></div>
+                    </form>
+                </div>
+
+                <!-- Catalog Management Section -->
+                <div class="admin-catalog-section">
+                    <div class="admin-catalog-header">
+                        <span class="admin-card-icon">📋</span>
+                        <h2>Manage Catalog</h2>
+                    </div>
+                    <div id="admin-catalog-container">
+                        <!-- JS renders all jerseys here grouped by category -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" style="position: relative; z-index: 1;">
+        <div class="container text-center">
+            <p>&copy; 2026 Eagle Sports. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js?v=4"></script>
+    <script>
+        // Specific logic for admin page UI
+        const fileInput = document.getElementById('jersey-image-file');
+        const uploadPlaceholder = document.getElementById('upload-placeholder');
+        const imagePreview = document.getElementById('image-preview');
+
+        uploadPlaceholder.addEventListener('click', () => fileInput.click());
+
+        fileInput.addEventListener('change', function() {
+            const file = this.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    imagePreview.src = e.target.result;
+                    imagePreview.style.display = 'block';
+                    uploadPlaceholder.style.display = 'none';
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Render admin stats
+        async function renderAdminStats() {
+            const statsEl = document.getElementById('admin-stats');
+            if (!statsEl) return;
+            const catalog = await fetchCatalog();
+            const categories = [...new Set(catalog.map(i => i.category))];
+            statsEl.innerHTML = `
+                <div class="stat-pill">
+                    <span class="stat-number">${catalog.length}</span>
+                    <span class="stat-label">Total Jerseys</span>
+                </div>
+                <div class="stat-pill">
+                    <span class="stat-number">${categories.length}</span>
+                    <span class="stat-label">Categories</span>
+                </div>
+            `;
+        }
+
+        document.addEventListener('DOMContentLoaded', renderAdminStats);
+
+        // Floating particles
+        (function createParticles() {
+            const container = document.getElementById('admin-particles');
+            if (!container) return;
+            for (let i = 0; i < 20; i++) {
+                const p = document.createElement('div');
+                p.className = 'particle';
+                p.style.left = Math.random() * 100 + '%';
+                p.style.animationDelay = Math.random() * 15 + 's';
+                p.style.animationDuration = (15 + Math.random() * 20) + 's';
+                p.style.width = p.style.height = (2 + Math.random() * 4) + 'px';
+                container.appendChild(p);
+            }
+        })();
+    </script>
+</body>
+</html>

@@ -1,0 +1,1111 @@
+:root {
+    --primary: #3b82f6;
+    --primary-glow: rgba(59, 130, 246, 0.5);
+    --secondary: #8b5cf6;
+    --dark: #0f172a;
+    --darker: #020617;
+    --light: #f8fafc;
+    --gray: #94a3b8;
+    --card-bg: rgba(30, 41, 59, 0.7);
+    --nav-bg: rgba(15, 23, 42, 0.8);
+    --border: rgba(255, 255, 255, 0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+body {
+    background-color: var(--darker);
+    color: var(--light);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+.brand {
+    font-family: 'Space Grotesk', sans-serif;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.3s ease;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+/* --- Typography --- */
+.section-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 3rem;
+    color: #ffffff;
+}
+
+/* --- Buttons --- */
+.btn-primary {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    border-radius: 8px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 15px var(--primary-glow);
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px var(--primary-glow);
+    filter: brightness(1.1);
+}
+
+.btn-admin {
+    padding: 0.5rem 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-size: 0.9rem;
+}
+
+.btn-admin:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.btn-outline {
+    padding: 0.5rem 1rem;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-size: 0.9rem;
+}
+
+.btn-outline:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.w-100 {
+    width: 100%;
+}
+
+/* --- Navbar --- */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0.6rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.brand {
+    font-size: 1.3rem;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: linear-gradient(to right, #0f172a, #334155);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.brand-icon {
+    -webkit-text-fill-color: initial;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+.nav-links a:not(.btn-admin):not(.btn-outline) {
+    font-weight: 600;
+    color: #070708;
+}
+
+.nav-links a:not(.btn-admin):not(.btn-outline):hover {
+    color: #1353ea;
+}
+
+.navbar .btn-admin {
+    padding: 0.45rem 1rem;
+    background: #0f172a;
+    color: white;
+    border: 1px solid #0f172a;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.navbar .btn-admin:hover {
+    background: #334155;
+    border-color: #334155;
+    color: white;
+}
+
+.navbar .btn-outline {
+    color: #475569;
+    border-color: rgba(0, 0, 0, 0.15);
+}
+
+.navbar .btn-outline:hover {
+    background: rgba(0, 0, 0, 0.05);
+    color: #0f172a;
+}
+
+/* --- Hero Section --- */
+.hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    background: url('assets/eagle_background.png') no-repeat center center/cover;
+    text-align: center;
+    padding: 140px 1rem 4rem 1rem;
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.hero .catalog-section {
+    background-color: transparent !important;
+    padding: 0;
+}
+
+.hero h1 {
+    font-size: 4.5rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    line-height: 1.1;
+    color: #ffffff;
+    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    animation: fadeUp 1s ease-out;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    color: var(--gray);
+    margin-bottom: 2rem;
+    animation: fadeUp 1s ease-out 0.2s backwards;
+}
+
+/* --- Catalog Section --- */
+.catalog-section {
+    padding: 1rem 0 5rem 0;
+    background-color: var(--darker);
+}
+
+.main-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+/* --- Cards --- */
+.card {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    aspect-ratio: 4 / 3;
+    background: #000;
+    border: 1px solid var(--border);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5), 0 0 15px var(--primary-glow);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.card:hover .card-img {
+    transform: scale(1.05);
+}
+
+.card-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1.5rem;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.6) 30%, rgba(0, 0, 0, 0) 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.badge {
+    background: #ef4444;
+    /* red */
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 800;
+    padding: 0.25rem 0.6rem;
+    border-radius: 4px;
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.card-title-pill {
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 30px;
+    padding: 0.5rem 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: white;
+    font-weight: 700;
+    font-size: 1.1rem;
+    width: max-content;
+}
+
+.search-icon {
+    width: 18px;
+    height: 18px;
+}
+
+/* --- Category Cards (Homepage) --- */
+.category-card {
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    position: relative;
+}
+
+.category-title-large {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin: 0;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+    background: rgba(0, 0, 0, 0.65);
+    padding: 0.3rem 1.2rem;
+    border-radius: 8px;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    z-index: 2;
+    width: max-content;
+}
+
+/* --- Admin Page --- */
+.admin-body {
+    position: relative;
+    min-height: 100vh;
+    background: url('assets/eagle_background.png') no-repeat center center/cover;
+    background-attachment: fixed;
+    overflow-x: hidden;
+}
+
+.admin-bg-overlay {
+    display: none;
+}
+
+/* Floating Particles - Removed for clean look */
+.admin-particles {
+    display: none;
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    90% {
+        opacity: 0.5;
+    }
+
+    100% {
+        transform: translateY(-100vh) rotate(720deg);
+        opacity: 0;
+    }
+}
+
+/* Admin Header Banner */
+.admin-header-banner {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 2rem 2rem 1.5rem;
+    margin-bottom: 2.5rem;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 24px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+}
+
+.admin-header-icon {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+}
+
+.admin-header-title {
+    font-size: 2.8rem;
+    font-weight: 800;
+    color: #0f172a;
+    margin-bottom: 0.3rem;
+    letter-spacing: -0.5px;
+}
+
+.admin-header-subtitle {
+    color: #475569;
+    font-size: 1.05rem;
+    margin-bottom: 1.5rem;
+}
+
+.admin-stats {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.stat-pill {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 0.75rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.2rem;
+    min-width: 120px;
+}
+
+.stat-number {
+    font-size: 2rem;
+    font-weight: 800;
+    font-family: 'Space Grotesk', sans-serif;
+    color: #0f172a;
+}
+
+.stat-label {
+    font-size: 0.8rem;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+}
+
+/* Admin Layout */
+.admin-layout {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 420px 1fr;
+    gap: 2.5rem;
+    align-items: start;
+}
+
+@media (max-width: 960px) {
+    .admin-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* --- Collection Pages (with eagle background) --- */
+.collection-body {
+    position: relative;
+    min-height: 100vh;
+    background: url('assets/eagle_background.png') no-repeat center center/cover;
+    background-attachment: fixed;
+}
+
+.collection-bg-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    z-index: 0;
+}
+
+.collection-main {
+    position: relative;
+    z-index: 1;
+    padding-top: 120px;
+    min-height: 100vh;
+    background: transparent !important;
+}
+
+.collection-body .footer {
+    position: relative;
+    z-index: 1;
+}
+
+.collection-body .navbar {
+    z-index: 1000;
+}
+
+.admin-main {
+    position: relative;
+    z-index: 1;
+    padding-top: 100px;
+    padding-bottom: 50px;
+}
+
+.admin-card {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 24px;
+    padding: 2.5rem;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    transition: all 0.4s ease;
+}
+
+.admin-card h2 {
+    margin-bottom: 0.25rem;
+    font-size: 1.6rem;
+    color: #0f172a;
+}
+
+.admin-card p {
+    color: #475569;
+    margin-bottom: 0;
+    font-size: 0.95rem;
+}
+
+/* Admin Card Glow Effect - Removed */
+.admin-card-glow {
+    position: relative;
+}
+
+/* Admin Card Header */
+.admin-card-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.admin-card-icon {
+    font-size: 2.2rem;
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f1f5f9;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    flex-shrink: 0;
+}
+
+/* Clean Button Style for Admin */
+.btn-upload-glow {
+    background: #0f172a;
+    color: #fff;
+    border: none;
+    box-shadow: none;
+}
+
+.btn-upload-glow:hover {
+    background: #334155;
+    box-shadow: none;
+    transform: translateY(-2px);
+}
+
+/* Upload Placeholder Enhancements */
+.upload-placeholder-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.upload-icon {
+    font-size: 2rem;
+    margin-bottom: 0.25rem;
+}
+
+.upload-hint {
+    font-size: 0.75rem;
+    color: rgba(148, 163, 184, 0.6);
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    color: #475569;
+    font-weight: 600;
+}
+
+.form-group input[type="text"],
+.form-group input[type="password"],
+.form-group select {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    background: #f8fafc;
+    border: 1px solid #cbd5e1;
+    border-radius: 12px;
+    color: #0f172a;
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: #0f172a;
+    box-shadow: 0 0 0 3px rgba(15, 23, 42, 0.1);
+    background: #ffffff;
+}
+
+.form-group select option {
+    background: #ffffff;
+}
+
+.image-upload-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.file-input {
+    display: none;
+}
+
+.upload-placeholder {
+    width: 100%;
+    height: 160px;
+    border: 2px dashed #cbd5e1;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #64748b;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: #f8fafc;
+}
+
+.upload-placeholder:hover {
+    border-color: #0f172a;
+    background: #f1f5f9;
+}
+
+.image-preview {
+    width: 100%;
+    height: 200px;
+    object-fit: contain;
+    border-radius: 12px;
+    margin-top: 1rem;
+    border: 1px solid #e2e8f0;
+}
+
+.message {
+    margin-top: 1rem;
+    text-align: center;
+    font-size: 0.9rem;
+    min-height: 20px;
+    padding: 0.5rem;
+    border-radius: 8px;
+}
+
+.message.success {
+    color: #4ade80;
+    background: rgba(74, 222, 128, 0.08);
+}
+
+.message.error {
+    color: #f87171;
+    background: rgba(248, 113, 113, 0.08);
+}
+
+
+/* --- Animations --- */
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* --- Footer --- */
+.footer {
+    padding: 2rem 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    background: linear-gradient(135deg, #ebe7e4, #16bcf9);
+    color: #100e0e;
+    font-weight: 600;
+}
+
+.text-center {
+    text-align: center;
+}
+
+/* --- Admin Catalog Management --- */
+.admin-catalog-section {
+    margin-top: 0;
+}
+
+.admin-catalog-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    padding: 1.5rem 2rem;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 20px;
+}
+
+.admin-catalog-header h2 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #0f172a;
+    margin: 0;
+}
+
+.admin-category-group {
+    margin-bottom: 2rem;
+    background: rgba(30, 41, 59, 0.4);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 20px;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.admin-category-group:hover {
+    border-color: rgba(59, 130, 246, 0.2);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+}
+
+.admin-category-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    color: var(--light);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.admin-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 1rem;
+}
+
+.admin-item-card {
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.admin-item-card:hover {
+    border-color: rgba(239, 68, 68, 0.5);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.admin-item-img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.admin-item-card:hover .admin-item-img {
+    transform: scale(1.05);
+}
+
+.admin-item-info {
+    padding: 0.75rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.admin-item-name {
+    font-size: 0.85rem;
+    color: var(--gray);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.btn-delete {
+    background: rgba(239, 68, 68, 0.12);
+    color: #ef4444;
+    border: 1px solid rgba(239, 68, 68, 0.25);
+    border-radius: 8px;
+    padding: 0.35rem 0.7rem;
+    font-size: 0.8rem;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+    font-weight: 600;
+}
+
+.btn-delete:hover {
+    background: #ef4444;
+    color: white;
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 3rem;
+    }
+
+    .nav-links {
+        gap: 1rem;
+    }
+
+    .admin-card {
+        padding: 1.5rem;
+    }
+
+    .admin-header-title {
+        font-size: 2rem;
+    }
+
+    .admin-grid {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    }
+}
+
+/* --- Pagination --- */
+.pagination-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    margin-top: 3rem;
+    padding: 1rem 0;
+}
+
+.btn-pagination {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    color: var(--light);
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+}
+
+.btn-pagination:hover:not(:disabled) {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    border-color: var(--primary);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px var(--primary-glow);
+}
+
+.btn-pagination:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.pagination-info {
+    font-weight: 600;
+    color: var(--gray);
+    font-size: 1rem;
+}
+
+/* --- Contact Us Button (Navbar) --- */
+.navbar .btn-contact {
+    font-weight: 600;
+    color: #475569;
+    transition: all 0.3s ease;
+}
+
+.navbar .btn-contact:hover {
+    color: #0f172a;
+}
+
+/* ===========================
+   CONTACT PAGE STYLES
+   =========================== */
+.contact-body {
+    position: relative;
+    min-height: 100vh;
+    background: url('assets/eagle_background.png') no-repeat center center/cover;
+    background-attachment: fixed;
+}
+
+.contact-bg-overlay {
+    display: none;
+}
+
+.contact-main {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 1rem 2rem;
+}
+
+.contact-compact-card {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 16px;
+    padding: 2rem 2.5rem;
+    width: 100%;
+    max-width: 440px;
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.15);
+}
+
+.contact-compact-title {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: #0f172a;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.contact-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.contact-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.7rem 0.75rem;
+    border-radius: 10px;
+    text-decoration: none;
+    color: #0f172a;
+    transition: background 0.2s ease;
+    cursor: pointer;
+}
+
+.contact-row:hover {
+    background: #f1f5f9;
+}
+
+.contact-row-static {
+    cursor: default;
+}
+
+.contact-row-icon {
+    font-size: 1.3rem;
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    flex-shrink: 0;
+    background: #f1f5f9;
+}
+
+.contact-row-text {
+    font-size: 0.95rem;
+    color: #475569;
+    line-height: 1.4;
+}
+
+.contact-row:hover .contact-row-text {
+    color: #0f172a;
+}
+
+@media (max-width: 500px) {
+    .contact-compact-card {
+        padding: 1.5rem;
+    }
+
+    /* ===========================
+   MAIN FOOTER STYLES
+   =========================== */
+    .main-footer {
+        background: linear-gradient(135deg, #ebe7e4, #16bcf9);
+        color: #ffffff;
+        padding: 4rem 0 1.5rem 0;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    /* (Removed footer-grid as it is no longer used) */
+
+    .footer-title {
+        font-size: 1.5rem;
+        font-weight: 800;
+        margin-bottom: 0.5rem;
+        color: #0f172a;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .footer-desc {
+        color: #1e293b;
+        line-height: 1.6;
+        max-width: 400px;
+        font-weight: 600;
+    }
+
+    .footer-contact-list {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 4.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .footer-contact-item {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        color: #000000;
+        text-decoration: none;
+        transition: transform 0.3s ease;
+        font-size: 0.95rem;
+        font-weight: 600;
+    }
+
+    .footer-contact-item:hover {
+        transform: translateY(-2px);
+    }
+
+    .footer-contact-item .icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .footer-bottom {
+        padding-top: 2rem;
+        border-top: 1px solid rgba(0, 0, 0, 0.15);
+        color: #1e293b;
+        font-size: 0.9rem;
+        font-weight: 700;
+    }
+
+    /* ===========================
+   LOGIN PAGE STYLES
+   =========================== */
+    .login-main {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 80px 1rem 2rem;
+        position: relative;
+        z-index: 1;
+    }
+
+    .login-card {
+        width: 100%;
+        max-width: 420px;
+        margin: 0;
+        animation: fadeUp 0.6s ease-out;
+    }
+
+    .login-header {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+    #login-message {
+        margin-top: 1rem;
+        text-align: center;
+        font-size: 0.9rem;
+    }
+
+    #login-message.error {
+        color: #ef4444;
+    }
+
+    #login-message.success {
+        color: #4ade80;
+    }
