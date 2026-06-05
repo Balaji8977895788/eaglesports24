@@ -2,7 +2,7 @@
 // Eagle Sports - Main Script (Backend Integrated)
 // =============================================
 
-const API_URL = 'http://localhost:3001/api';
+const API_URL = '/api';
 
 // ---- Data Fetching Helpers ----
 
@@ -41,7 +41,7 @@ async function renderCategories() {
     const categoriesMap = {};
     catalog.forEach(item => {
         if (!categoriesMap[item.category]) {
-            categoriesMap[item.category] = `http://localhost:3001/${item.image}`;
+            categoriesMap[item.category] = `/${item.image}`;
         }
     });
 
@@ -92,7 +92,7 @@ async function renderJerseysByCategory(categoryName, page = 1) {
 
     let html = '';
     paginatedItems.forEach(item => {
-        const imgUrl = `http://localhost:3001/${item.image}`;
+        const imgUrl = `/${item.image}`;
         html += `
             <div class="card clean-card">
                 <img src="${imgUrl}" alt="${item.name}" class="card-img" loading="lazy">
@@ -275,7 +275,7 @@ async function renderAdminCatalog() {
         html += '<h3 class="admin-category-title">' + category + ' (' + items.length + ')</h3>';
         html += '<div class="admin-grid">';
         items.forEach(function(item) {
-            const imgUrl = `http://localhost:3001/${item.image}`;
+            const imgUrl = `/${item.image}`;
             html += '<div class="admin-item-card" id="item-' + item.id + '">';
             html += '  <img src="' + imgUrl + '" alt="' + item.name + '" class="admin-item-img" crossorigin="anonymous">';
             html += '  <div class="admin-item-info">';
