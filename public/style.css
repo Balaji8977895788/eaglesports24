@@ -250,6 +250,10 @@ a {
     border: 1px solid var(--border);
 }
 
+.clean-card {
+    aspect-ratio: 3 / 4; /* 1200x1600 px aspect ratio */
+}
+
 .card:hover {
     transform: translateY(-5px);
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5), 0 0 15px var(--primary-glow);
