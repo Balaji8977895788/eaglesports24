@@ -39,7 +39,7 @@ const loginLimiter = rateLimit({
 // --- AUTHENTICATION ROUTES ---
 app.post('/api/login', loginLimiter, (req, res) => {
     const { email, password } = req.body;
-    
+
     if (!email || !password) {
         return res.status(400).json({ error: 'Email and password required' });
     }
@@ -82,14 +82,14 @@ app.get('/api/jerseys', (req, res) => {
 // Add a new jersey (Protected)
 app.post('/api/jerseys', authenticateToken, upload.single('image'), (req, res) => {
     const { name, category } = req.body;
-    
+
     if (!name || !category || !req.file) {
         return res.status(400).json({ error: 'Name, category, and image are required' });
     }
 
     const imagePath = 'assets/' + req.file.filename;
 
-    db.run('INSERT INTO jerseys (name, category, image) VALUES (?, ?, ?)', [name, category, imagePath], function(err) {
+    db.run('INSERT INTO jerseys (name, category, image) VALUES (?, ?, ?)', [name, category, imagePath], function (err) {
         if (err) return res.status(500).json({ error: err.message });
         res.json({
             id: this.lastID,
@@ -103,7 +103,7 @@ app.post('/api/jerseys', authenticateToken, upload.single('image'), (req, res) =
 // Delete a jersey (Protected)
 app.delete('/api/jerseys/:id', authenticateToken, (req, res) => {
     const id = req.params.id;
-    db.run('DELETE FROM jerseys WHERE id = ?', id, function(err) {
+    db.run('DELETE FROM jerseys WHERE id = ?', id, function (err) {
         if (err) return res.status(500).json({ error: err.message });
         if (this.changes === 0) return res.status(404).json({ error: 'Jersey not found' });
         res.json({ message: 'Deleted successfully' });
