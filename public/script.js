@@ -27,15 +27,15 @@ async function renderCategories() {
 
     // Map of category -> { link, emoji }
     const categoryConfig = {
-        'Volleyball':       { link: 'volleyball.html',  emoji: '🏐' },
-        'Basketball':       { link: 'basketball.html',  emoji: '🏀' },
-        'Kabaddi':          { link: 'kabaddi.html',     emoji: '🤾' },
-        'Cricket Jerseys':  { link: 'cricket.html',     emoji: '🏏' },
-        'Festival Design':  { link: 'festival.html',    emoji: '🎉' },
-        'Special Jerseys':  { link: 'special.html',     emoji: '⭐' },
-        'Cricket':          { link: 'cricket.html',     emoji: '🏏' },
-        'Football':         { link: 'football.html',    emoji: '⚽' },
-        'Esports':          { link: 'esports.html',     emoji: '🎮' }
+        'Volleyball': { link: 'volleyball.html', emoji: '' },
+        'Basketball': { link: 'basketball.html', emoji: '' },
+        'Kabaddi': { link: 'kabaddi.html', emoji: '' },
+        'Cricket Jerseys': { link: 'cricket.html', emoji: '' },
+        'Festival Design': { link: 'festival.html', emoji: '' },
+        'Special Jerseys': { link: 'special.html', emoji: '' },
+        'Cricket': { link: 'cricket.html', emoji: '' },
+        'Football': { link: 'football.html', emoji: '⚽' },
+        'Esports': { link: 'esports.html', emoji: '🎮' }
     };
 
     const categoriesMap = {};
@@ -67,7 +67,7 @@ async function renderJerseysByCategory(categoryName, page = 1) {
     if (!grid) return;
 
     const catalog = await fetchCatalog();
-    const items = catalog.filter(item => 
+    const items = catalog.filter(item =>
         item.category.toLowerCase() === categoryName.toLowerCase()
     );
 
@@ -120,7 +120,7 @@ async function renderJerseysByCategory(categoryName, page = 1) {
 }
 
 // Make globally available for inline onclick attributes
-window.changeCollectionPage = function(categoryName, newPage) {
+window.changeCollectionPage = function (categoryName, newPage) {
     renderJerseysByCategory(categoryName, newPage);
     const mainSection = document.querySelector('.catalog-section');
     if (mainSection) {
@@ -144,27 +144,27 @@ function handleLogin(e) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password })
     })
-    .then(res => res.json())
-    .then(data => {
-        if (data.error) {
-            msgEl.textContent = data.error;
+        .then(res => res.json())
+        .then(data => {
+            if (data.error) {
+                msgEl.textContent = data.error;
+                msgEl.className = 'message error';
+            } else if (data.token) {
+                localStorage.setItem('eagleAdminToken', data.token);
+                msgEl.textContent = 'Login successful! Redirecting...';
+                msgEl.className = 'message success';
+                setTimeout(() => {
+                    window.location.href = 'admin.html';
+                }, 1000);
+            }
+        })
+        .catch(err => {
+            msgEl.textContent = 'Server error. Please try again.';
             msgEl.className = 'message error';
-        } else if (data.token) {
-            localStorage.setItem('eagleAdminToken', data.token);
-            msgEl.textContent = 'Login successful! Redirecting...';
-            msgEl.className = 'message success';
-            setTimeout(() => {
-                window.location.href = 'admin.html';
-            }, 1000);
-        }
-    })
-    .catch(err => {
-        msgEl.textContent = 'Server error. Please try again.';
-        msgEl.className = 'message error';
-    });
+        });
 }
 
-window.logout = function() {
+window.logout = function () {
     localStorage.removeItem('eagleAdminToken');
     window.location.href = 'login.html';
 };
@@ -225,7 +225,7 @@ async function handleUpload(e) {
                 preview.style.display = 'none';
             }
             document.getElementById('upload-placeholder').style.display = 'flex';
-            
+
             // Re-render
             renderAdminCatalog();
             if (typeof renderAdminStats === 'function') {
@@ -244,7 +244,7 @@ function showMessage(msg, type) {
     if (!messageEl) return;
     messageEl.textContent = msg;
     messageEl.className = 'message ' + type;
-    setTimeout(function() {
+    setTimeout(function () {
         messageEl.textContent = '';
         messageEl.className = 'message';
     }, 4000);
@@ -260,8 +260,8 @@ async function renderAdminCatalog() {
 
     const catalog = await fetchCatalog();
     const grouped = {};
-    
-    catalog.forEach(function(item) {
+
+    catalog.forEach(function (item) {
         if (!grouped[item.category]) {
             grouped[item.category] = [];
         }
@@ -274,7 +274,7 @@ async function renderAdminCatalog() {
         html += '<div class="admin-category-group">';
         html += '<h3 class="admin-category-title">' + category + ' (' + items.length + ')</h3>';
         html += '<div class="admin-grid">';
-        items.forEach(function(item) {
+        items.forEach(function (item) {
             const imgUrl = `/${item.image}`;
             html += '<div class="admin-item-card" id="item-' + item.id + '">';
             html += '  <img src="' + imgUrl + '" alt="' + item.name + '" class="admin-item-img" crossorigin="anonymous">';
@@ -294,7 +294,7 @@ async function renderAdminCatalog() {
     container.innerHTML = html;
 }
 
-window.deleteJersey = async function(id) {
+window.deleteJersey = async function (id) {
     if (!confirm('Are you sure you want to delete this jersey?')) return;
 
     const token = getToken();
@@ -324,7 +324,7 @@ window.deleteJersey = async function(id) {
 
 // ---- Init on page load ----
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     checkAdminAccess();
 
     renderCategories();

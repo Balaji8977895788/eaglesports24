@@ -251,7 +251,18 @@ a {
 }
 
 .clean-card {
-    aspect-ratio: 3 / 4; /* 1200x1600 px aspect ratio */
+    aspect-ratio: 3 / 4;
+    background: #ffffff;
+    border: 1px solid #e5e5e5;
+}
+
+.clean-card .card-img {
+    object-fit: cover;
+}
+
+.clean-card:hover {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border-color: #d0d0d0;
 }
 
 .card:hover {
@@ -473,19 +484,24 @@ a {
     }
 }
 
-/* --- Collection Pages (with eagle background) --- */
+/* --- Collection Pages --- */
 .collection-body {
     position: relative;
     min-height: 100vh;
-    background: url('assets/eagle_background.png') no-repeat center center/cover;
-    background-attachment: fixed;
+    background: #ffffff;
+}
+
+.collection-body .section-title {
+    color: #000000;
 }
 
 .collection-bg-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.55);
-    z-index: 0;
+    display: none;
+}
+
+.collection-body .main-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.2rem;
 }
 
 .collection-main {
@@ -855,6 +871,10 @@ a {
     .admin-grid {
         grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
     }
+
+    .collection-body .main-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 /* --- Pagination --- */
@@ -1007,109 +1027,108 @@ a {
     .contact-compact-card {
         padding: 1.5rem;
     }
+}
 
-    /* ===========================
+/* ===========================
    MAIN FOOTER STYLES
    =========================== */
-    .main-footer {
-        background: linear-gradient(135deg, #ebe7e4, #16bcf9);
-        color: #ffffff;
-        padding: 4rem 0 1.5rem 0;
-        border-top: 1px solid rgba(255, 255, 255, 0.1);
-    }
+.main-footer {
+    background: linear-gradient(135deg, #ebe7e4, #16bcf9);
+    color: #ffffff;
+    padding: 4rem 0 1.5rem 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
 
-    /* (Removed footer-grid as it is no longer used) */
+.footer-title {
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+    color: #0f172a;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
 
-    .footer-title {
-        font-size: 1.5rem;
-        font-weight: 800;
-        margin-bottom: 0.5rem;
-        color: #0f172a;
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-    }
+.footer-desc {
+    color: #1e293b;
+    line-height: 1.6;
+    max-width: 400px;
+    font-weight: 600;
+}
 
-    .footer-desc {
-        color: #1e293b;
-        line-height: 1.6;
-        max-width: 400px;
-        font-weight: 600;
-    }
+.footer-contact-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 4.5rem;
+    margin-bottom: 2rem;
+}
 
-    .footer-contact-list {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        align-items: center;
-        gap: 4.5rem;
-        margin-bottom: 2rem;
-    }
+.footer-contact-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: #000000;
+    text-decoration: none;
+    transition: transform 0.3s ease;
+    font-size: 0.95rem;
+    font-weight: 600;
+}
 
-    .footer-contact-item {
-        display: flex;
-        align-items: center;
-        gap: 0.75rem;
-        color: #000000;
-        text-decoration: none;
-        transition: transform 0.3s ease;
-        font-size: 0.95rem;
-        font-weight: 600;
-    }
+.footer-contact-item:hover {
+    transform: translateY(-2px);
+}
 
-    .footer-contact-item:hover {
-        transform: translateY(-2px);
-    }
+.footer-contact-item .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
-    .footer-contact-item .icon {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
+.footer-bottom {
+    padding-top: 2rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.15);
+    color: #1e293b;
+    font-size: 0.9rem;
+    font-weight: 700;
+}
 
-    .footer-bottom {
-        padding-top: 2rem;
-        border-top: 1px solid rgba(0, 0, 0, 0.15);
-        color: #1e293b;
-        font-size: 0.9rem;
-        font-weight: 700;
-    }
-
-    /* ===========================
+/* ===========================
    LOGIN PAGE STYLES
    =========================== */
-    .login-main {
-        min-height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 80px 1rem 2rem;
-        position: relative;
-        z-index: 1;
-    }
+.login-main {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 100px 1rem 2rem;
+    position: relative;
+    z-index: 1;
+}
 
-    .login-card {
-        width: 100%;
-        max-width: 420px;
-        margin: 0;
-        animation: fadeUp 0.6s ease-out;
-    }
+.login-card {
+    width: 100%;
+    max-width: 420px;
+    margin: 0 auto;
+    animation: fadeUp 0.6s ease-out;
+}
 
-    .login-header {
-        text-align: center;
-        margin-bottom: 2rem;
-    }
+.login-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
 
-    #login-message {
-        margin-top: 1rem;
-        text-align: center;
-        font-size: 0.9rem;
-    }
+#login-message {
+    margin-top: 1rem;
+    text-align: center;
+    font-size: 0.9rem;
+}
 
-    #login-message.error {
-        color: #ef4444;
-    }
+#login-message.error {
+    color: #ef4444;
+}
 
-    #login-message.success {
-        color: #4ade80;
-    }
+#login-message.success {
+    color: #4ade80;
+}
