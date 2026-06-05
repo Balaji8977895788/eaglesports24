@@ -8,8 +8,8 @@ const rateLimit = require('express-rate-limit');
 const db = require('./database');
 
 const app = express();
-const PORT = 3001;
-const JWT_SECRET = 'eagle_sports_super_secret_key_2026';
+const PORT = process.env.PORT || 3001;
+const JWT_SECRET = process.env.JWT_SECRET || 'eagle_sports_super_secret_key_2026';
 
 // Middleware
 app.use(cors());
