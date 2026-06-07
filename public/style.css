@@ -764,7 +764,8 @@ a {
     width: 64px;
     height: 64px;
     border-radius: 50%;
-    background: rgba(135, 206, 235, 0.15); /* Light sky blue */
+    background: rgba(135, 206, 235, 0.15);
+    /* Light sky blue */
     color: #0f172a;
     margin-bottom: 1.5rem;
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -772,7 +773,7 @@ a {
 
 .feature-card:hover .feature-icon {
     background: #ffffff;
-    color: #87ceeb;
+    color: #ff9800;
     transform: scale(1.15) rotate(5deg);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
@@ -786,12 +787,19 @@ a {
 }
 
 @keyframes bounceIcon {
-    0%, 20%, 50%, 80%, 100% {
+
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
         transform: translateY(0);
     }
+
     40% {
         transform: translateY(-8px);
     }
+
     60% {
         transform: translateY(-4px);
     }
@@ -799,10 +807,10 @@ a {
 
 /* Hover effects */
 .feature-card:hover {
-    background-color: #87ceeb;
+    background-color: #ff9800;
     transform: translateY(-10px);
-    box-shadow: 0 20px 40px rgba(135, 206, 235, 0.3), 0 0 20px rgba(135, 206, 235, 0.2);
-    border-color: #87ceeb;
+    box-shadow: 0 20px 40px rgba(255, 152, 0, 0.3), 0 0 20px rgba(255, 152, 0, 0.2);
+    border-color: #ff9800;
 }
 
 .feature-card:hover h3,
@@ -877,7 +885,7 @@ a {
 .footer {
     padding: 2rem 0;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
-    background: linear-gradient(135deg, #ebe7e4, #16bcf9);
+    background: linear-gradient(135deg, #ebe7e4, #f7501d);
     color: #100e0e;
     font-weight: 600;
 }
@@ -1186,9 +1194,10 @@ a {
    MAIN FOOTER STYLES
    =========================== */
 .main-footer {
-    background: linear-gradient(135deg, #ebe7e4, #16bcf9);
+    background: linear-gradient(135deg, #ebe7e4, #f93016);
     color: #ffffff;
-    padding: 4rem 0 1.5rem 0;
+    padding: 2rem 0 1rem 0;
+
     border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
@@ -1214,8 +1223,9 @@ a {
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    gap: 4.5rem;
-    margin-bottom: 2rem;
+    gap: 3.5rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
 }
 
 .footer-contact-item {
