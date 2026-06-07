@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Basketball Options | Eagle Sports</title>
+    <title>Basketball Traditional | Eagle Sports</title>
     <link
         href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap"
         rel="stylesheet">
@@ -28,21 +28,13 @@
     </nav>
 
     <main class="catalog-section collection-main">
-        <div class="container" style="text-align: center;">
-            <h2 class="section-title">Basketball Views</h2>
-            <p style="color: #475569; margin-bottom: 3rem;">Select how you want to view the Basketball collection</p>
-            <div style="display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;">
-                <a href="basketball-jersey.html" class="card category-card" style="width: 300px; padding: 3rem 2rem; text-decoration: none;">
-                    <div style="font-size: 4rem; margin-bottom: 1.5rem;">🎽</div>
-                    <h3 class="category-title-large">Jersey View</h3>
-                    <p style="color: #64748b; margin-top: 1rem; font-size: 0.95rem;">Standard jersey catalog view</p>
-                </a>
-                <a href="basketball-traditional.html" class="card category-card" style="width: 300px; padding: 3rem 2rem; text-decoration: none;">
-                    <div style="font-size: 4rem; margin-bottom: 1.5rem;">🖼️</div>
-                    <h3 class="category-title-large">Traditional View</h3>
-                    <p style="color: #64748b; margin-top: 1rem; font-size: 0.95rem;">1600 x 1118 dimensions</p>
-                </a>
+        <div class="container">
+            <h2 class="section-title"> Basketball Traditional</h2>
+            <div id="jersey-grid" class="main-grid">
+                <!-- Rendered by JS -->
             </div>
+            <p id="empty-message" style="text-align:center; color:#94a3b8; display:none;">No jerseys uploaded yet. Go to
+                Admin Portal to add some!</p>
         </div>
     </main>
 
@@ -61,7 +53,9 @@
 
     <script src="script.js?v=4"></script>
     <script>
-        // No catalog rendering needed on this choice page
+        document.addEventListener('DOMContentLoaded', function () {
+            renderJerseysByCategory('Basketball Traditional');
+        });
     </script>
 </body>
 

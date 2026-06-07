@@ -93,8 +93,9 @@ async function renderJerseysByCategory(categoryName, page = 1) {
     let html = '';
     paginatedItems.forEach(item => {
         const imgUrl = `/${item.image}`;
+        const cardClass = categoryName === 'Basketball Traditional' ? 'traditional-card' : 'clean-card';
         html += `
-            <div class="card clean-card" style="cursor: pointer;" onclick="openImageModal('${imgUrl}')">
+            <div class="card ${cardClass}" style="cursor: pointer;" onclick="openImageModal('${imgUrl}')">
                 <img src="${imgUrl}" alt="${item.name}" class="card-img" loading="lazy">
             </div>
         `;
@@ -378,6 +379,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Check if we are on a specific category page
     const pageTitle = document.title.toLowerCase();
     if (pageTitle.includes('volleyball')) renderJerseysByCategory('Volleyball');
+    else if (pageTitle.includes('basketball traditional')) renderJerseysByCategory('Basketball Traditional');
     else if (pageTitle.includes('basketball')) renderJerseysByCategory('Basketball');
     else if (pageTitle.includes('kabaddi')) renderJerseysByCategory('Kabaddi');
     else if (pageTitle.includes('cricket')) renderJerseysByCategory('Cricket Jerseys');
