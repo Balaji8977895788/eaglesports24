@@ -17,10 +17,11 @@
     <nav class="navbar">
         <div class="nav-container">
             <a href="index.html" class="brand">
-                <span class="brand-icon">🦅</span> Eagle Sports Wear
+                <img src="assets/logo2.png" alt="Logo"
+                    style="height: 32px; width: 32px; border-radius: 50%; object-fit: cover;"> Eagle Sports Wear
             </a>
             <div class="nav-links">
-                <a href="index.html" class="btn-outline">← Back to Categories</a>
+                <a href="index.html">Home</a>
                 <a href="contact.html" class="btn-contact">Contact Us</a>
             </div>
         </div>
@@ -39,9 +40,16 @@
 
     <footer class="footer">
         <div class="container text-center">
+            <div style="margin-bottom: 10px;"><img src="assets/logo2.png" alt="Logo" style="height: 32px; width: 32px; border-radius: 50%; object-fit: cover;"></div>
             <p>&copy; 2026 Eagle Sports. All rights reserved.</p>
         </div>
     </footer>
+
+    <!-- Image Modal -->
+    <div id="image-modal" class="image-modal">
+        <span class="close-modal" onclick="closeImageModal()">&times;</span>
+        <img class="modal-content" id="expanded-image">
+    </div>
 
     <script src="script.js?v=4"></script>
     <script>

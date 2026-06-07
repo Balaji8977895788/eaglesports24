@@ -94,7 +94,7 @@ async function renderJerseysByCategory(categoryName, page = 1) {
     paginatedItems.forEach(item => {
         const imgUrl = `/${item.image}`;
         html += `
-            <div class="card clean-card">
+            <div class="card clean-card" style="cursor: pointer;" onclick="openImageModal('${imgUrl}')">
                 <img src="${imgUrl}" alt="${item.name}" class="card-img" loading="lazy">
             </div>
         `;
@@ -127,6 +127,52 @@ window.changeCollectionPage = function (categoryName, newPage) {
         mainSection.scrollIntoView({ behavior: 'smooth' });
     }
 };
+
+// ---- LIGHTBOX / IMAGE MODAL ----
+window.openImageModal = function(imgSrc) {
+    const modal = document.getElementById('image-modal');
+    const modalImg = document.getElementById('expanded-image');
+    if (!modal || !modalImg) return;
+
+    // Preload the image, then show modal instantly
+    const preload = new Image();
+    preload.onload = function() {
+        modalImg.src = imgSrc;
+        requestAnimationFrame(() => {
+            modal.classList.add('show');
+        });
+    };
+    preload.src = imgSrc;
+
+    // Also set src immediately in case image is cached
+    if (preload.complete) {
+        modalImg.src = imgSrc;
+        requestAnimationFrame(() => {
+            modal.classList.add('show');
+        });
+    }
+};
+
+window.closeImageModal = function() {
+    const modal = document.getElementById('image-modal');
+    if (modal) {
+        modal.classList.remove('show');
+    }
+};
+
+// Close on backdrop click or Escape key
+document.addEventListener('click', function(e) {
+    const modal = document.getElementById('image-modal');
+    if (e.target === modal) {
+        closeImageModal();
+    }
+});
+
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        closeImageModal();
+    }
+});
 
 // ---- AUTHENTICATION ----
 function getToken() {
