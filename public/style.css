@@ -19,8 +19,8 @@
 }
 
 body {
-    background: url('assets/eaglev_background.png') no-repeat center center fixed;
-    background-size: 100% 100%;
+    background: url('assets/eagle4.png') no-repeat center center fixed;
+    background-size: cover;
     background-color: var(--darker);
     color: var(--light);
     line-height: 1.6;

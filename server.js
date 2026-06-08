@@ -59,7 +59,7 @@ app.post('/api/login', loginLimiter, async (req, res) => {
         res.json({ token });
     } catch (err) {
         console.error('Login error:', err);
-        res.status(500).json({ error: 'Database error' });
+        res.status(500).json({ error: 'Database error: ' + (err.message || JSON.stringify(err)) });
     }
 });
 
