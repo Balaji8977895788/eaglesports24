@@ -369,6 +369,7 @@ document.addEventListener('DOMContentLoaded', function () {
     renderCategories();
 
     // Handle Dynamic Choice Page
+    const pageTitle = document.title.toLowerCase();
     if (pageTitle.includes('options | eagle sports') && window.location.pathname.includes('choice.html')) {
         const urlParams = new URLSearchParams(window.location.search);
         const category = urlParams.get('category');
