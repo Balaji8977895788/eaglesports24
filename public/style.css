@@ -19,7 +19,7 @@
 }
 
 body {
-    background: url('assets/eagle4.png') no-repeat center center fixed;
+    background: url('assets/eagle5.png') no-repeat center center fixed;
     background-size: cover;
     background-color: var(--darker);
     color: var(--light);
