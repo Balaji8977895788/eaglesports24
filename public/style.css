@@ -23,12 +23,34 @@ html {
 }
 
 body {
-    background: url('assets/eagle5.png') no-repeat center center fixed;
-    background-size: cover;
     background-color: var(--darker);
     color: var(--light);
     line-height: 1.6;
     overflow-x: hidden;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: url('assets/eagle5.png') no-repeat center center;
+    background-size: cover;
+    z-index: -1;
+    pointer-events: none;
+}
+
+@media (max-width: 768px) {
+    body::before {
+        background-position: center top;
+    }
+}
+
+.collection-body::before,
+.admin-body::before {
+    display: none !important;
 }
 
 h1,
