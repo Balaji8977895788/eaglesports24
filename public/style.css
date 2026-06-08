@@ -282,6 +282,21 @@ a {
     border-color: #d0d0d0;
 }
 
+.basketball-col2-card {
+    aspect-ratio: 1600 / 1517;
+    background: #ffffff;
+    border: 1px solid #e5e5e5;
+}
+
+.basketball-col2-card .card-img {
+    object-fit: cover;
+}
+
+.basketball-col2-card:hover {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border-color: #d0d0d0;
+}
+
 .card:hover {
     transform: translateY(-5px);
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5), 0 0 15px var(--primary-glow);

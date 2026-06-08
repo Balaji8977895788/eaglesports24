@@ -79,7 +79,12 @@ async function renderJerseysByCategory(categoryName, page = 1) {
     let html = '';
     paginatedItems.forEach(item => {
         const imgUrl = item.image.startsWith('http') ? item.image : `/${item.image}`;
-        const cardClass = categoryName === 'Basketball Traditional' ? 'traditional-card' : 'clean-card';
+        let cardClass = 'clean-card';
+        if (categoryName === 'Basketball Traditional') {
+            cardClass = 'traditional-card';
+        } else if (categoryName === 'Basketball - Collection 2') {
+            cardClass = 'basketball-col2-card';
+        }
         html += `
             <div class="card ${cardClass}" style="cursor: pointer;" onclick="openImageModal('${imgUrl}')">
                 <img src="${imgUrl}" alt="${item.name}" class="card-img" loading="lazy">
