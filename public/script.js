@@ -41,7 +41,7 @@ async function renderCategories() {
     const categoriesMap = {};
     catalog.forEach(item => {
         if (!categoriesMap[item.category]) {
-            categoriesMap[item.category] = `/${item.image}`;
+            categoriesMap[item.category] = item.image.startsWith('http') ? item.image : `/${item.image}`;
         }
     });
 
@@ -92,7 +92,7 @@ async function renderJerseysByCategory(categoryName, page = 1) {
 
     let html = '';
     paginatedItems.forEach(item => {
-        const imgUrl = `/${item.image}`;
+        const imgUrl = item.image.startsWith('http') ? item.image : `/${item.image}`;
         const cardClass = categoryName === 'Basketball Traditional' ? 'traditional-card' : 'clean-card';
         html += `
             <div class="card ${cardClass}" style="cursor: pointer;" onclick="openImageModal('${imgUrl}')">
@@ -322,7 +322,7 @@ async function renderAdminCatalog() {
         html += '<h3 class="admin-category-title">' + category + ' (' + items.length + ')</h3>';
         html += '<div class="admin-grid">';
         items.forEach(function (item) {
-            const imgUrl = `/${item.image}`;
+            const imgUrl = item.image.startsWith('http') ? item.image : `/${item.image}`;
             html += '<div class="admin-item-card" id="item-' + item.id + '">';
             html += '  <img src="' + imgUrl + '" alt="' + item.name + '" class="admin-item-img" crossorigin="anonymous">';
             html += '  <div class="admin-item-info">';

@@ -1,0 +1,90 @@
+========================================================================
+EAGLE SPORTS - SUPABASE SETUP GUIDE & SQL CODE
+========================================================================
+
+This guide walks you through setting up Supabase to permanently store your
+jersey catalog and uploaded images for free.
+
+------------------------------------------------------------------------
+STEP 1: CREATE A SUPABASE PROJECT
+------------------------------------------------------------------------
+1. Go to https://supabase.com and sign up for a free account.
+2. Click "New Project" and name it (e.g., EagleSports).
+3. Set a database password (save this password somewhere safe).
+4. Choose the region closest to you or your server (e.g., Mumbai, Singapore).
+5. Click "Create new project" and wait a couple of minutes for it to set up.
+
+------------------------------------------------------------------------
+STEP 2: CREATE THE STORAGE BUCKET (FOR UPLOADED IMAGES)
+------------------------------------------------------------------------
+1. On your Supabase dashboard, click the "Storage" folder icon on the left menu.
+2. Click "New Bucket".
+3. Name the bucket precisely: jerseys
+4. Toggle the "Public" switch to ON (so visitors can load images on the site).
+5. Click "Create Bucket".
+
+------------------------------------------------------------------------
+STEP 3: RUN THE DATABASE SETUP SQL
+------------------------------------------------------------------------
+1. On your Supabase dashboard, click the "SQL Editor" icon (looks like a terminal logo on the left menu).
+2. Click "New query".
+3. Copy-paste the entire SQL code below into the editor:
+
+-- [COPY CODE BELOW] --
+
+-- Create jerseys table
+CREATE TABLE IF NOT EXISTS jerseys (
+    id SERIAL PRIMARY KEY,
+    name TEXT NOT NULL,
+    category TEXT NOT NULL,
+    image TEXT NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Create users table (for admin authentication)
+CREATE TABLE IF NOT EXISTS users (
+    id SERIAL PRIMARY KEY,
+    email TEXT UNIQUE NOT NULL,
+    password TEXT NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Insert default admin user (email: admin@eaglesports.com / password: admin123)
+-- The password hash here is the bcrypt hashed password for admin123
+INSERT INTO users (email, password)
+VALUES ('admin@eaglesports.com', '$2a$10$tZ2c/t0d2c.6L.u2/9dEee32EefvXy9tJ/77a3m.W2W9K0k9.U/J2')
+ON CONFLICT (email) DO NOTHING;
+
+-- Seed default jerseys if table is empty
+INSERT INTO jerseys (name, category, image)
+VALUES 
+    ('Pro Volley Jersey', 'Volleyball', 'assets/volleyball_jersey.png'),
+    ('Hoops Elite Jersey', 'Basketball', 'assets/basketball_jersey.png'),
+    ('Raider Pro Jersey', 'Kabaddi', 'assets/kabaddi_jersey.png'),
+    ('Cricket Pro Jersey', 'Cricket Jerseys', 'assets/cricket_jersey.png'),
+    ('Festive Holi Edition', 'Festival Design', 'assets/festival_jersey.png'),
+    ('Eagle Gold Special', 'Special Jerseys', 'assets/special_jersey.png')
+ON CONFLICT DO NOTHING;
+
+-- [COPY CODE ABOVE] --
+
+4. Click "Run" on the top right. You should see a success message.
+
+------------------------------------------------------------------------
+STEP 4: GET YOUR API KEYS & CREDENTIALS
+------------------------------------------------------------------------
+1. On your Supabase dashboard, click the gear settings icon (bottom left sidebar).
+2. Go to Settings -> API.
+3. Locate:
+   - Project URL
+   - anon (public) key
+4. Copy them and let me know, or put them in a .env file in the project directory:
+
+SUPABASE_URL=your_project_url
+SUPABASE_ANON_KEY=your_anon_public_key
+JWT_SECRET=eagle_sports_super_secret_key_2026
+PORT=3001
+
+========================================================================
+Finished! Let me know when you are ready to write the integration code.
+========================================================================
