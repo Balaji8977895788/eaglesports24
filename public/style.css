@@ -11,6 +11,10 @@
     --border: rgba(255, 255, 255, 0.1);
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -660,13 +664,27 @@ a {
 .form-group select {
     width: 100%;
     padding: 0.8rem 1rem;
-    background: #f8fafc;
+    padding-right: 2.5rem;
+    background-color: #f8fafc;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23475569' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1em;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
     border: 1px solid #cbd5e1;
     border-radius: 12px;
     color: #0f172a;
     font-size: 1rem;
     outline: none;
     transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.form-group select:hover {
+    border-color: #94a3b8;
+    background-color: #f1f5f9;
 }
 
 .form-group input:focus,
