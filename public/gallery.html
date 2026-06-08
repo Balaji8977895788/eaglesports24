@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Basketball Options | Eagle Sports</title>
+    <title>Gallery | Eagle Sports</title>
     <link
         href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap"
         rel="stylesheet">
@@ -12,6 +12,7 @@
 </head>
 
 <body class="collection-body">
+    <!-- Dark overlay for collection pages -->
     <div class="collection-bg-overlay"></div>
 
     <nav class="navbar">
@@ -22,6 +23,7 @@
             </a>
             <div class="nav-links">
                 <a href="index.html">Home</a>
+                <a href="#" id="back-to-choices" class="btn-outline" style="display:none; padding: 6px 12px; margin-right: 10px;">← Back</a>
                 <a href="contact.html" class="btn-contact">Contact Us</a>
             </div>
         </div>
@@ -29,26 +31,26 @@
 
     <main class="catalog-section collection-main">
         <div class="container" style="text-align: center;">
-            <h2 class="section-title">Basketball Views</h2>
-            <p style="color: #475569; margin-bottom: 3rem;">Select how you want to view the Basketball collection</p>
-            <div class="main-grid choice-grid">
-                <a href="basketball-jersey.html" class="card category-card">
-                    <img src="assets/kobe2.jpg" alt="Jersey View" class="card-img" loading="lazy">
-                    <h3 class="category-title-large">Collections 1</h3>
-                </a>
-                <a href="basketball-traditional.html" class="card category-card">
-                    <img src="assets/kobe3.jpg" alt="Traditional View" class="card-img" loading="lazy">
-                    <h3 class="category-title-large">Collections 2</h3>
-                </a>
-                <a href="#" class="card category-card">
-                    <img src="assets/kobe4.jpg" alt="Collections 3" class="card-img" loading="lazy">
-                    <h3 class="category-title-large">Collections 3</h3>
-                </a>
-                <a href="#" class="card category-card">
-                    <img src="assets/kobe5.jpg" alt="Collections 4" class="card-img" loading="lazy">
-                    <h3 class="category-title-large">Collections 4</h3>
-                </a>
+            <h2 class="section-title" id="gallery-title">Gallery</h2>
+            <p style="color: #475569; margin-bottom: 3rem;" id="gallery-subtitle">Browse the exclusive collection</p>
+
+            <!-- Loading Spinner (Optional) -->
+            <div id="loading-spinner" style="display: none; color: #fff; margin: 2rem 0;">
+                <p>Loading jerseys...</p>
             </div>
+
+            <!-- Empty State Message -->
+            <div id="empty-message" class="empty-state" style="display: none;">
+                <span style="font-size: 3rem; display: block; margin-bottom: 1rem;">🎽</span>
+                <h3>No Jerseys Found</h3>
+                <p>We are currently updating this collection. Please check back later!</p>
+            </div>
+
+            <div class="main-grid" id="jersey-grid">
+                <!-- Jerseys populated by script.js -->
+            </div>
+            
+            <div id="pagination-controls" class="pagination-controls" style="display: none;"></div>
         </div>
     </main>
 
@@ -66,10 +68,7 @@
         <img class="modal-content" id="expanded-image">
     </div>
 
-    <script src="script.js?v=4"></script>
-    <script>
-        // No catalog rendering needed on this choice page
-    </script>
+    <script src="script.js?v=5"></script>
 </body>
 
 </html>

@@ -24,12 +24,12 @@ function renderCategories() {
     if (!container) return;
 
     const staticCategories = [
-        { name: 'Volleyball', link: 'volleyball.html', image: 'assets/volleyball_jersey.png' },
-        { name: 'Basketball', link: 'basketball.html', image: 'assets/basketball_jersey.png' },
-        { name: 'Kabaddi', link: 'kabaddi.html', image: 'assets/kabaddi_jersey.png' },
-        { name: 'Cricket Jerseys', link: 'cricket.html', image: 'assets/cricket_jersey.png' },
-        { name: 'Festival Design', link: 'festival.html', image: 'assets/festival_jersey.png' },
-        { name: 'Special Jerseys', link: 'special.html', image: 'assets/special_jersey.png' }
+        { name: 'Volleyball', link: 'choice.html?category=Volleyball', image: 'assets/volleyball_jersey.png' },
+        { name: 'Basketball', link: 'choice.html?category=Basketball', image: 'assets/basketball_jersey.png' },
+        { name: 'Kabaddi', link: 'choice.html?category=Kabaddi', image: 'assets/kabaddi_jersey.png' },
+        { name: 'Cricket Jerseys', link: 'choice.html?category=Cricket%20Jerseys', image: 'assets/cricket_jersey.png' },
+        { name: 'Festival Design', link: 'choice.html?category=Festival%20Design', image: 'assets/festival_jersey.png' },
+        { name: 'Special Jerseys', link: 'choice.html?category=Special%20Jerseys', image: 'assets/special_jersey.png' }
     ];
 
     let html = '<div class="main-grid">';
@@ -220,6 +220,7 @@ async function handleUpload(e) {
 
     const nameInput = document.getElementById('jersey-name');
     const categoryInput = document.getElementById('jersey-category');
+    const subCollectionInput = document.getElementById('jersey-subcollection');
     const fileInput = document.getElementById('jersey-image-file');
     const token = getToken();
 
@@ -233,9 +234,14 @@ async function handleUpload(e) {
         return;
     }
 
+    let finalCategory = categoryInput.value;
+    if (subCollectionInput && subCollectionInput.value) {
+        finalCategory = categoryInput.value + ' - ' + subCollectionInput.value;
+    }
+
     const formData = new FormData();
     formData.append('name', nameInput.value);
-    formData.append('category', categoryInput.value);
+    formData.append('category', finalCategory);
     formData.append('image', fileInput.files[0]);
 
     try {
@@ -362,15 +368,48 @@ document.addEventListener('DOMContentLoaded', function () {
 
     renderCategories();
 
-    // Check if we are on a specific category page
-    const pageTitle = document.title.toLowerCase();
-    if (pageTitle.includes('volleyball')) renderJerseysByCategory('Volleyball');
-    else if (pageTitle.includes('basketball traditional')) renderJerseysByCategory('Basketball Traditional');
-    else if (pageTitle.includes('basketball')) renderJerseysByCategory('Basketball');
-    else if (pageTitle.includes('kabaddi')) renderJerseysByCategory('Kabaddi');
-    else if (pageTitle.includes('cricket')) renderJerseysByCategory('Cricket Jerseys');
-    else if (pageTitle.includes('festival')) renderJerseysByCategory('Festival Design');
-    else if (pageTitle.includes('special')) renderJerseysByCategory('Special Jerseys');
+    // Handle Dynamic Choice Page
+    if (pageTitle.includes('options | eagle sports') && window.location.pathname.includes('choice.html')) {
+        const urlParams = new URLSearchParams(window.location.search);
+        const category = urlParams.get('category');
+        if (category) {
+            document.getElementById('choice-title').textContent = category + ' Views';
+            const choiceGrid = document.getElementById('choice-grid');
+            
+            const collections = ['Collection 1', 'Collection 2', 'Collection 3', 'Collection 4'];
+            const images = ['assets/kobe2.jpg', 'assets/kobe3.jpg', 'assets/kobe4.jpg', 'assets/kobe5.jpg']; // Default placeholders
+            
+            let html = '';
+            collections.forEach((sub, index) => {
+                const encCategory = encodeURIComponent(category);
+                const encSub = encodeURIComponent(sub);
+                html += `
+                    <a href="gallery.html?category=${encCategory}&sub=${encSub}" class="card category-card">
+                        <img src="${images[index]}" alt="${sub}" class="card-img" loading="lazy">
+                        <h3 class="category-title-large">${sub}</h3>
+                    </a>
+                `;
+            });
+            choiceGrid.innerHTML = html;
+        }
+    }
+
+    // Handle Dynamic Gallery Page
+    if (pageTitle.includes('gallery | eagle sports') && window.location.pathname.includes('gallery.html')) {
+        const urlParams = new URLSearchParams(window.location.search);
+        const category = urlParams.get('category');
+        const sub = urlParams.get('sub');
+        if (category && sub) {
+            document.getElementById('gallery-title').textContent = category;
+            document.getElementById('gallery-subtitle').textContent = sub;
+            const backBtn = document.getElementById('back-to-choices');
+            if (backBtn) {
+                backBtn.href = `choice.html?category=${encodeURIComponent(category)}`;
+                backBtn.style.display = 'inline-block';
+            }
+            renderJerseysByCategory(category + ' - ' + sub);
+        }
+    }
 
     // Login form
     const loginForm = document.getElementById('login-form');

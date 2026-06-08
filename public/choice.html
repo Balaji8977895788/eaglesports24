@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Basketball Jerseys | Eagle Sports</title>
+    <title>Options | Eagle Sports</title>
     <link
         href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap"
         rel="stylesheet">
@@ -28,19 +28,19 @@
     </nav>
 
     <main class="catalog-section collection-main">
-        <div class="container">
-            <h2 class="section-title"> Basketball Collection</h2>
-            <div id="jersey-grid" class="main-grid">
-                <!-- Rendered by JS -->
+        <div class="container" style="text-align: center;">
+            <h2 class="section-title" id="choice-title">Collection Views</h2>
+            <p style="color: #475569; margin-bottom: 3rem;">Select how you want to view this collection</p>
+            <div class="main-grid choice-grid" id="choice-grid">
+                <!-- Dynamically populated by script.js -->
             </div>
-            <p id="empty-message" style="text-align:center; color:#94a3b8; display:none;">No jerseys uploaded yet. Go to
-                Admin Portal to add some!</p>
         </div>
     </main>
 
     <footer class="footer">
         <div class="container text-center">
-            <div style="margin-bottom: 10px;"><img src="assets/logo2.png" alt="Logo" style="height: 32px; width: 32px; border-radius: 50%; object-fit: cover;"></div>
+            <div style="margin-bottom: 10px;"><img src="assets/logo2.png" alt="Logo"
+                    style="height: 32px; width: 32px; border-radius: 50%; object-fit: cover;"></div>
             <p>&copy; 2026 Eagle Sports. All rights reserved.</p>
         </div>
     </footer>
@@ -51,12 +51,7 @@
         <img class="modal-content" id="expanded-image">
     </div>
 
-    <script src="script.js?v=4"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            renderJerseysByCategory('Basketball');
-        });
-    </script>
+    <script src="script.js?v=5"></script>
 </body>
 
 </html>
