@@ -19,42 +19,28 @@ async function fetchCatalog() {
 
 // ---- HOMEPAGE: Render category cards ----
 
-async function renderCategories() {
+function renderCategories() {
     const container = document.getElementById('catalog-container');
     if (!container) return;
 
-    const catalog = await fetchCatalog();
-
-    // Map of category -> { link, emoji }
-    const categoryConfig = {
-        'Volleyball': { link: 'volleyball.html', emoji: '' },
-        'Basketball': { link: 'basketball.html', emoji: '' },
-        'Kabaddi': { link: 'kabaddi.html', emoji: '' },
-        'Cricket Jerseys': { link: 'cricket.html', emoji: '' },
-        'Festival Design': { link: 'festival.html', emoji: '' },
-        'Special Jerseys': { link: 'special.html', emoji: '' },
-        'Cricket': { link: 'cricket.html', emoji: '' },
-        'Football': { link: 'football.html', emoji: '⚽' },
-        'Esports': { link: 'esports.html', emoji: '🎮' }
-    };
-
-    const categoriesMap = {};
-    catalog.forEach(item => {
-        if (!categoriesMap[item.category]) {
-            categoriesMap[item.category] = item.image.startsWith('http') ? item.image : `/${item.image}`;
-        }
-    });
+    const staticCategories = [
+        { name: 'Volleyball', link: 'volleyball.html', image: 'assets/volleyball_jersey.png' },
+        { name: 'Basketball', link: 'basketball.html', image: 'assets/basketball_jersey.png' },
+        { name: 'Kabaddi', link: 'kabaddi.html', image: 'assets/kabaddi_jersey.png' },
+        { name: 'Cricket Jerseys', link: 'cricket.html', image: 'assets/cricket_jersey.png' },
+        { name: 'Festival Design', link: 'festival.html', image: 'assets/festival_jersey.png' },
+        { name: 'Special Jerseys', link: 'special.html', image: 'assets/special_jersey.png' }
+    ];
 
     let html = '<div class="main-grid">';
-    for (const [category, image] of Object.entries(categoriesMap)) {
-        const config = categoryConfig[category] || { link: '#', emoji: '🏆' };
+    staticCategories.forEach(cat => {
         html += `
-            <a href="${config.link}" class="card category-card">
-                <img src="${image}" alt="${category}" class="card-img" loading="lazy">
-                <h3 class="category-title-large">${config.emoji} ${category}</h3>
+            <a href="${cat.link}" class="card category-card">
+                <img src="${cat.image}" alt="${cat.name}" class="card-img" loading="lazy">
+                <h3 class="category-title-large">${cat.name}</h3>
             </a>
         `;
-    }
+    });
     html += '</div>';
     container.innerHTML = html;
 }
