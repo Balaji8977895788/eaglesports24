@@ -65,12 +65,17 @@
                                 <option value="Cricket Jerseys">🏏 Cricket Jerseys</option>
                                 <option value="Festival Design">🎉 Festival Design</option>
                                 <option value="Special Jerseys">⭐ Special Jerseys</option>
+                                <option value="Football">⚽ Football</option>
+                                <option value="Khokho">🏃 Khokho</option>
+                                <option value="IPL">🏏 IPL</option>
+                                <option value="Promotional">🔥 Promotional</option>
                             </select>
                         </div>
                         
-                        <div class="form-group">
+                        <div class="form-group" id="subcollection-group">
                             <label for="jersey-subcollection">Sub-Collection</label>
-                            <select id="jersey-subcollection" required>
+                            <select id="jersey-subcollection">
+                                <option value="">None (Direct Category)</option>
                                 <option value="Collection 1">Collection 1</option>
                                 <option value="Collection 2">Collection 2</option>
                                 <option value="Collection 3">Collection 3</option>
@@ -143,6 +148,27 @@
                 reader.readAsDataURL(file);
             }
         });
+
+        // Hide sub-collection dropdown for direct categories
+        const categorySelect = document.getElementById('jersey-category');
+        const subCollectionGroup = document.getElementById('subcollection-group');
+        const subCollectionSelect = document.getElementById('jersey-subcollection');
+        const directCategories = ['Festival Design', 'Football', 'Khokho', 'IPL', 'Promotional'];
+
+        categorySelect.addEventListener('change', function() {
+            if (directCategories.includes(this.value)) {
+                subCollectionGroup.style.display = 'none';
+                subCollectionSelect.value = '';
+            } else {
+                subCollectionGroup.style.display = 'block';
+                if (!subCollectionSelect.value) {
+                    subCollectionSelect.value = 'Collection 1';
+                }
+            }
+        });
+        
+        // Trigger on load
+        categorySelect.dispatchEvent(new Event('change'));
 
         // Render admin stats
         async function renderAdminStats() {

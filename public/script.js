@@ -28,8 +28,12 @@ function renderCategories() {
         { name: 'Basketball', link: 'choice.html?category=Basketball', image: 'assets/basketball_jersey.png' },
         { name: 'Kabaddi', link: 'choice.html?category=Kabaddi', image: 'assets/kabaddi_jersey.png' },
         { name: 'Cricket Jerseys', link: 'choice.html?category=Cricket%20Jerseys', image: 'assets/cricket_jersey.png' },
-        { name: 'Festival Design', link: 'choice.html?category=Festival%20Design', image: 'assets/festival_jersey.png' },
-        { name: 'Special Jerseys', link: 'choice.html?category=Special%20Jerseys', image: 'assets/special_jersey.png' }
+        { name: 'Special Jerseys', link: 'choice.html?category=Special%20Jerseys', image: 'assets/special_jersey.png' },
+        { name: 'Football', link: 'gallery.html?category=Football', image: 'assets/football_jersey.png' },
+        { name: 'Khokho', link: 'gallery.html?category=Khokho', image: 'assets/khokho_jersey.png' },
+        { name: 'IPL', link: 'gallery.html?category=IPL', image: 'assets/ipl_jersey.png' },
+        { name: 'Festival Design', link: 'gallery.html?category=Festival%20Design', image: 'assets/festival_jersey.png' },
+        { name: 'Promotional', link: 'gallery.html?category=Promotional', image: 'assets/promotional.png' }
     ];
 
     let html = '<div class="main-grid">';
@@ -218,6 +222,73 @@ function checkAdminAccess() {
     }
 }
 
+// Helper: Compress image before upload using Canvas to save Supabase storage space
+function compressImage(file, maxDimension = 1200, quality = 0.75) {
+    return new Promise((resolve) => {
+        // Skip compression for tiny files (e.g. under 200KB)
+        if (file.size < 200 * 1024) {
+            return resolve(file);
+        }
+
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = (event) => {
+            const img = new Image();
+            img.src = event.target.result;
+            img.onload = () => {
+                const canvas = document.createElement('canvas');
+                let width = img.width;
+                let height = img.height;
+
+                // Scale down if it exceeds maxDimension
+                if (width > height) {
+                    if (width > maxDimension) {
+                        height = Math.round((height * maxDimension) / width);
+                        width = maxDimension;
+                    }
+                } else {
+                    if (height > maxDimension) {
+                        width = Math.round((width * maxDimension) / height);
+                        height = maxDimension;
+                    }
+                }
+
+                canvas.width = width;
+                canvas.height = height;
+
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(img, 0, 0, width, height);
+
+                // Convert to WebP format with given quality
+                canvas.toBlob(
+                    (blob) => {
+                        if (blob) {
+                            // Ensure the compressed size is actually smaller, otherwise fallback
+                            if (blob.size < file.size) {
+                                const newName = file.name.replace(/\.[^/.]+$/, "") + ".webp";
+                                const compressedFile = new File([blob], newName, {
+                                    type: "image/webp",
+                                    lastModified: Date.now()
+                                });
+                                console.log(`Compressed image from ${(file.size / 1024).toFixed(1)} KB to ${(blob.size / 1024).toFixed(1)} KB`);
+                                resolve(compressedFile);
+                            } else {
+                                resolve(file);
+                            }
+                        } else {
+                            resolve(file);
+                        }
+                    },
+                    'image/webp',
+                    quality
+                );
+            };
+            img.onerror = () => resolve(file);
+        };
+        reader.onerror = () => resolve(file);
+    });
+}
+
 // ---- ADMIN: Handle Upload ----
 
 async function handleUpload(e) {
@@ -244,10 +315,18 @@ async function handleUpload(e) {
         finalCategory = categoryInput.value + ' - ' + subCollectionInput.value;
     }
 
+    // Show compressing status message
+    showMessage('Compressing image...', 'info');
+
+    const originalFile = fileInput.files[0];
+    const uploadFile = await compressImage(originalFile, 1200, 0.75);
+
+    showMessage('Uploading image...', 'info');
+
     const formData = new FormData();
     formData.append('name', nameInput.value);
     formData.append('category', finalCategory);
-    formData.append('image', fileInput.files[0]);
+    formData.append('image', uploadFile);
 
     try {
         const response = await fetch(`${API_URL}/jerseys`, {
@@ -383,7 +462,16 @@ document.addEventListener('DOMContentLoaded', function () {
             const choiceGrid = document.getElementById('choice-grid');
             
             const collections = ['Collection 1', 'Collection 2', 'Collection 3', 'Collection 4'];
-            const images = ['assets/kobe2.jpg', 'assets/kobe3.jpg', 'assets/kobe4.jpg', 'assets/kobe5.jpg']; // Default placeholders
+            let images = ['assets/kobe2.jpg', 'assets/kobe3.jpg', 'assets/kobe4.jpg', 'assets/kobe5.jpg']; // Default placeholders
+            
+            const lowerCategory = category.toLowerCase();
+            if (lowerCategory === 'volleyball') {
+                images = ['assets/volleyball1.png', 'assets/volleyball2.png', 'assets/volleyball3.png', 'assets/volleyball4.png'];
+            } else if (lowerCategory === 'kabaddi') {
+                images = ['assets/kabaddi1.png', 'assets/kabaddi2.png', 'assets/kabaddi3.png', 'assets/kabaddi4.png'];
+            } else if (lowerCategory === 'cricket jerseys') {
+                images = ['assets/cricket1.png', 'assets/cricket2.png', 'assets/cricket3.png', 'assets/cricket4.png'];
+            }
             
             let html = '';
             collections.forEach((sub, index) => {
@@ -405,15 +493,25 @@ document.addEventListener('DOMContentLoaded', function () {
         const urlParams = new URLSearchParams(window.location.search);
         const category = urlParams.get('category');
         const sub = urlParams.get('sub');
-        if (category && sub) {
+        if (category) {
             document.getElementById('gallery-title').textContent = category;
-            document.getElementById('gallery-subtitle').textContent = sub;
             const backBtn = document.getElementById('back-to-choices');
-            if (backBtn) {
-                backBtn.href = `choice.html?category=${encodeURIComponent(category)}`;
-                backBtn.style.display = 'inline-block';
+            
+            if (sub) {
+                document.getElementById('gallery-subtitle').textContent = sub;
+                if (backBtn) {
+                    backBtn.href = `choice.html?category=${encodeURIComponent(category)}`;
+                    backBtn.style.display = 'inline-block';
+                }
+                renderJerseysByCategory(category + ' - ' + sub);
+            } else {
+                document.getElementById('gallery-subtitle').textContent = 'All Items';
+                if (backBtn) {
+                    backBtn.href = 'index.html';
+                    backBtn.style.display = 'inline-block';
+                }
+                renderJerseysByCategory(category);
             }
-            renderJerseysByCategory(category + ' - ' + sub);
         }
     }
 
