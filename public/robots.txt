@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /admin.html
+Disallow: /login.html
+
+Sitemap: https://eaglesports24.com/sitemap.xml

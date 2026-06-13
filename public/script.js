@@ -86,7 +86,7 @@ async function renderJerseysByCategory(categoryName, page = 1) {
         let cardClass = 'clean-card';
         if (categoryName === 'Basketball Traditional' || categoryName === 'Basketball - Collection 1') {
             cardClass = 'traditional-card';
-        } else if (categoryName === 'Basketball - Collection 2' || categoryName === 'Basketball - Collection 3') {
+        } else if (categoryName === 'Basketball - Collection 2' || categoryName === 'Basketball - Collection 3' || categoryName.startsWith('Football')) {
             cardClass = 'basketball-col2-card';
         }
         html += `
