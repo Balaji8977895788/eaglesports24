@@ -86,7 +86,7 @@ async function renderJerseysByCategory(categoryName, page = 1) {
         let cardClass = 'clean-card';
         if (categoryName === 'Basketball Traditional' || categoryName === 'Basketball - Collection 1') {
             cardClass = 'traditional-card';
-        } else if (categoryName === 'Basketball - Collection 2' || categoryName === 'Basketball - Collection 3' || categoryName.startsWith('Football')) {
+        } else if (categoryName === 'Basketball - Collection 2' || categoryName === 'Basketball - Collection 3' || categoryName.startsWith('Football') || categoryName === 'Cricket Jerseys - Collection 1') {
             cardClass = 'basketball-col2-card';
         }
         html += `
@@ -461,7 +461,7 @@ document.addEventListener('DOMContentLoaded', function () {
             document.getElementById('choice-title').textContent = category + ' Views';
             const choiceGrid = document.getElementById('choice-grid');
             
-            const collections = ['Collection 1', 'Collection 2', 'Collection 3', 'Collection 4'];
+            let collections = ['Collection 1', 'Collection 2', 'Collection 3', 'Collection 4'];
             let images = ['assets/kobe2.jpg', 'assets/kobe3.jpg', 'assets/kobe4.jpg', 'assets/kobe5.jpg']; // Default placeholders
             
             const lowerCategory = category.toLowerCase();
@@ -471,6 +471,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 images = ['assets/kabaddi1.png', 'assets/kabaddi2.png', 'assets/kabaddi3.png', 'assets/kabaddi4.png'];
             } else if (lowerCategory === 'cricket jerseys') {
                 images = ['assets/cricket1.png', 'assets/cricket2.png', 'assets/cricket3.png', 'assets/cricket4.png'];
+            } else if (lowerCategory === 'basketball') {
+                collections.push('Referee T-shirts');
+                images.push('assets/basketball_jersey.png');
             }
             
             let html = '';
