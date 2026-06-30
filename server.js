@@ -84,7 +84,7 @@ app.get('/api/jerseys', async (req, res) => {
         const { data: rows, error } = await supabase
             .from('jerseys')
             .select('*')
-            .order('id', { ascending: true });
+            .order('id', { ascending: false });
 
         if (error) throw error;
 

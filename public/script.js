@@ -125,10 +125,62 @@ window.changeCollectionPage = function (categoryName, newPage) {
 };
 
 // ---- LIGHTBOX / IMAGE MODAL ----
+window.currentModalImages = [];
+window.currentModalIndex = -1;
+
 window.openImageModal = function(imgSrc) {
     const modal = document.getElementById('image-modal');
     const modalImg = document.getElementById('expanded-image');
     if (!modal || !modalImg) return;
+
+    // Check if navigation arrows exist, if not create them dynamically
+    let prevBtn = modal.querySelector('.nav-prev');
+    let nextBtn = modal.querySelector('.nav-next');
+    
+    if (!prevBtn) {
+        prevBtn = document.createElement('span');
+        prevBtn.className = 'modal-nav prev nav-prev';
+        prevBtn.innerHTML = '&#10094;';
+        prevBtn.onclick = function(e) {
+            e.stopPropagation();
+            if (typeof navigateModal === 'function') navigateModal(-1);
+        };
+        modal.appendChild(prevBtn);
+    }
+    
+    if (!nextBtn) {
+        nextBtn = document.createElement('span');
+        nextBtn.className = 'modal-nav next nav-next';
+        nextBtn.innerHTML = '&#10095;';
+        nextBtn.onclick = function(e) {
+            e.stopPropagation();
+            if (typeof navigateModal === 'function') navigateModal(1);
+        };
+        modal.appendChild(nextBtn);
+    }
+
+    // Determine context (which images are on screen)
+    const imageCards = document.querySelectorAll('[onclick^="openImageModal"] img, img[onclick^="openImageModal"]');
+    if (imageCards.length > 0) {
+        window.currentModalImages = Array.from(imageCards).map(img => {
+            return new URL(img.src, window.location.href).href;
+        });
+        
+        const fullImgSrc = new URL(imgSrc, window.location.href).href;
+        window.currentModalIndex = window.currentModalImages.indexOf(fullImgSrc);
+    } else {
+        window.currentModalImages = [imgSrc];
+        window.currentModalIndex = 0;
+    }
+
+    // Show/hide arrows based on array size
+    if (window.currentModalImages.length > 1) {
+        prevBtn.style.display = 'flex';
+        nextBtn.style.display = 'flex';
+    } else {
+        prevBtn.style.display = 'none';
+        nextBtn.style.display = 'none';
+    }
 
     // Preload the image, then show modal instantly
     const preload = new Image();
@@ -149,6 +201,25 @@ window.openImageModal = function(imgSrc) {
     }
 };
 
+window.navigateModal = function(direction) {
+    if (window.currentModalImages.length <= 1 || window.currentModalIndex === -1) return;
+    
+    window.currentModalIndex += direction;
+    
+    // Wrap around
+    if (window.currentModalIndex < 0) {
+        window.currentModalIndex = window.currentModalImages.length - 1;
+    } else if (window.currentModalIndex >= window.currentModalImages.length) {
+        window.currentModalIndex = 0;
+    }
+    
+    const newSrc = window.currentModalImages[window.currentModalIndex];
+    const modalImg = document.getElementById('expanded-image');
+    if (modalImg) {
+        modalImg.src = newSrc;
+    }
+};
+
 window.closeImageModal = function() {
     const modal = document.getElementById('image-modal');
     if (modal) {
@@ -156,7 +227,7 @@ window.closeImageModal = function() {
     }
 };
 
-// Close on backdrop click or Escape key
+// Close on backdrop click
 document.addEventListener('click', function(e) {
     const modal = document.getElementById('image-modal');
     if (e.target === modal) {
@@ -165,7 +236,16 @@ document.addEventListener('click', function(e) {
 });
 
 document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') {
+    const modal = document.getElementById('image-modal');
+    if (modal && modal.classList.contains('show')) {
+        if (e.key === 'Escape') {
+            closeImageModal();
+        } else if (e.key === 'ArrowLeft') {
+            navigateModal(-1);
+        } else if (e.key === 'ArrowRight') {
+            navigateModal(1);
+        }
+    } else if (e.key === 'Escape') {
         closeImageModal();
     }
 });
